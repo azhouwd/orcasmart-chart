@@ -2,11 +2,11 @@ import "./App.css";
 import React from "react";
 import axios from "axios";
 
-import TotalPrice from "./components/TotalPrice";
-import InfoOverview from "./components/InfoOverview";
-import HotSale from "./components/HotSale";
-import HotView from "./components/HotView";
-import TotalCartPrice from "./components/TotalCartPrice";
+import TotalPrice from "./components/TotalSoldPrice/TotalPrice";
+import InfoOverview from "./components/InfoOverview/InfoOverview";
+import HotSale from "./components/HotSale/HotSale";
+import HotView from "./components/HotView/HotView";
+import TotalCartPrice from "./components/TotalCartPrice/TotalCartPrice";
 
 class App extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ class App extends React.Component {
         .then(data => {
           this.setState({ topSales: Object.values(data) });
         });
-    }, 30000);
+    }, 1000);
 
     setInterval(() => {
       axios
@@ -79,9 +79,11 @@ class App extends React.Component {
             <HotView topViewed={topViewed} />
             <HotSale topSold={topSales} />
           </div>
+          <div className="price-condition">
+            <TotalCartPrice cartPrice={cartPrice} />
+            <TotalPrice totalPrice={totalPrice} />
+          </div>
         </div>
-        <TotalCartPrice cartPrice={cartPrice} />
-        <TotalPrice totalPrice={totalPrice} />
       </div>
     );
   }
